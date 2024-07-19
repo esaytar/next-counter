@@ -68,7 +68,11 @@ export default function Home() {
     },
   ]
 
-  const sortedDates = dates.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+  const sortedDates = dates
+    .slice()
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .filter(a => new Date(a.date) > new Date())
+    .concat(dates.filter(a => new Date(a.date) < new Date()))
 
   return (
     <main className="lg:w-4/6 2xl:w-3/6 flex flex-col gap-2.5 w-full">
