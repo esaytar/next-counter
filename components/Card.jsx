@@ -16,13 +16,22 @@ export default function Card({reason, date}) {
         const diff = setDiffTime(date)
         if (diff <= 0) {
             setStyles('!bg-gray-200 order-2 grayscale')
-            return
-        } else setStyles('')
+            const now = new Date()
+            const target = new Date(date)
+            const diffFromNow = now - target
 
-        setDays((prev) => ({...prev, numberDays: Math.floor(diff / (1000 * 60 * 60 * 24))}))
-        setHours((prev) => ({...prev, numberHours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}))
-        setMinutes((prev) => ({...prev, numberMinutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))}))
-        setSeconds((prev) => ({...prev, numberSeconds: Math.floor((diff % (1000 * 60)) / 1000)}))
+            setDays((prev) => ({...prev, numberDays: Math.round(diffFromNow / (1000 * 60 * 60 * 24))}))
+
+            setHours((prev) => ({...prev, numberHours: Math.floor((diffFromNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}))
+            setMinutes((prev) => ({...prev, numberMinutes: Math.floor((diffFromNow % (1000 * 60 * 60)) / (1000 * 60))}))
+            setSeconds((prev) => ({...prev, numberSeconds: Math.floor((diffFromNow % (1000 * 60)) / 1000)}))
+        } else {
+            setStyles('')
+            setDays((prev) => ({...prev, numberDays: Math.floor(diff / (1000 * 60 * 60 * 24))}))
+            setHours((prev) => ({...prev, numberHours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}))
+            setMinutes((prev) => ({...prev, numberMinutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))}))
+            setSeconds((prev) => ({...prev, numberSeconds: Math.floor((diff % (1000 * 60)) / 1000)}))
+        }
 
         function setRightWord(numbers, ...forms) {
             let stringDate
@@ -46,19 +55,20 @@ export default function Card({reason, date}) {
     }, [])
 
     return (
-        <div className={`${styles} shadow-lg bg-white p-4 rounded-xl w-full flex flex-col gap-2.5 items-center min-h-60`}>
+        <div className={`${styles} shadow-lg bg-white p-4 rounded-xl w-full flex flex-col gap-2.5 items-center min-h-[14.5rem]`}>
             <p className="text-2xl font-semibold text-center">{reason}<br/><span className="underline text-red-500">{normalDate}</span></p>
             <div className="text-2xl text-center flex flex-col items-center justify-center h-full !font-normal">
-                {styles !== '' ? (
-                    <div>0 дней <br /> 0 часов <br /> 0 минут<br /> 0 секунд</div>
-                ) : (
+                <div className={`${days.numberDays == 0 ? 'hidden' : 'block'}`}>
+                    {[days.numberDays, days.daysWord].join(' ')}
+                    {styles !== '' ? ' назад' : ''}
+                </div>
+                {styles === '' ? (
                     <>
-                        <div className={`${days.numberDays == 0 ? 'hidden' : 'block'}`}>{[days.numberDays, days.daysWord].join(' ')}</div>
                         <div className={`${hours.numberHours == 0 ? 'hidden' : 'block'}`}>{[hours.numberHours, hours.hoursWord].join(' ')}</div>
                         <div className={`${minutes.numberMinutes == 0 ? 'hidden' : 'block'}`}>{[minutes.numberMinutes, minutes.minutesWord].join(' ')}</div>
-                        <div>{[seconds.numberSeconds, seconds.secondsWord].join(' ')}</div>
+                        <div>{[seconds.numberSeconds, seconds.secondsWord].join(' ')}</div>  
                     </>
-                )}
+                ) : ''}
             </div>
         </div>
     )

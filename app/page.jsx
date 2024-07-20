@@ -1,6 +1,5 @@
 import Card from "@/components/Card";
 import HeadCard from "@/components/HeadCard";
-import Image from "next/image";
 
 export function setDiffTime(date) {
   const timeNow = new Date()
@@ -11,10 +10,10 @@ export function setDiffTime(date) {
 
 function findNextSunday() {
   const today = new Date()
-  const daysUntilSunday = (7 - today.getDay()) % 7
+  const daysUntilSunday = (6 - today.getDay()) % 7
   const nextSunday = new Date(today)
   nextSunday.setDate(today.getDate() + daysUntilSunday)
-  nextSunday.setHours('00')
+  nextSunday.setHours('20')
   nextSunday.setMinutes('00')
   nextSunday.setSeconds('00')
   nextSunday.setMilliseconds('00')
@@ -27,43 +26,43 @@ export default function Home() {
 
   const dates = [
     {
-      reason: 'до ближайшего звонка',
+      reason: 'ближайший звонок',
       date: nearestCall
     },
     {
-      reason: 'до двухлетия знакомства',
+      reason: 'двухлетие знакомства',
       date: "2024-07-18 20:55:00"
     },
     {
-      reason: 'до присяги',
+      reason: 'присяга',
       date: "2024-08-03 00:00:00"
     },
     {
-      reason: 'до рыбьего дня',
+      reason: 'рыбий день',
       date: "2024-08-29 00:00:00"
     },
     {
-      reason: 'до годовщины',
+      reason: 'годовщина',
       date: "2024-09-06 00:00:00"
     },
     {
-      reason: 'до нового года',
+      reason: 'новый год',
       date: "2025-01-01 00:00:00"
     },
     {
-      reason: 'до след. летнего призыва',
+      reason: 'след. летний призыв',
       date: "2025-04-01 00:00:00"
     },
     {
-      reason: 'до дембеля',
+      reason: 'дембель',
       date: demDate
     },
     {
-      reason: 'мяу',
+      reason: 'кошачий день',
       date: "2024-07-29 00:00:00"
     },
     {
-      reason: 'до осеннего призыва',
+      reason: 'осенний призыв',
       date: "2024-10-01 00:00:00"
     },
   ]
