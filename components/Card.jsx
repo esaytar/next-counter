@@ -20,11 +20,11 @@ export default function Card({reason, date}) {
             const target = new Date(date)
             const diffFromNow = now - target
 
-            setDays((prev) => ({...prev, numberDays: Math.round(diffFromNow / (1000 * 60 * 60 * 24))}))
+            setDays((prev) => ({...prev, numberDays: Math.ceil(diffFromNow / (1000 * 60 * 60 * 24))}))
 
-            setHours((prev) => ({...prev, numberHours: Math.floor((diffFromNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}))
-            setMinutes((prev) => ({...prev, numberMinutes: Math.floor((diffFromNow % (1000 * 60 * 60)) / (1000 * 60))}))
-            setSeconds((prev) => ({...prev, numberSeconds: Math.floor((diffFromNow % (1000 * 60)) / 1000)}))
+            // setHours((prev) => ({...prev, numberHours: Math.floor((diffFromNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}))
+            // setMinutes((prev) => ({...prev, numberMinutes: Math.floor((diffFromNow % (1000 * 60 * 60)) / (1000 * 60))}))
+            // setSeconds((prev) => ({...prev, numberSeconds: Math.floor((diffFromNow % (1000 * 60)) / 1000)}))
         } else {
             setStyles('')
             setDays((prev) => ({...prev, numberDays: Math.floor(diff / (1000 * 60 * 60 * 24))}))
