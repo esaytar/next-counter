@@ -23,6 +23,7 @@ function findNextSunday() {
 export default function Home() {
   const demDate = "2025-07-05 00:00:00"
   const nearestCall = findNextSunday()
+  // const nearestCall = "2024-08-02 13:30:00"
 
   const dates = [
     { reason: 'повестка', date: "2024-07-02 08:00:00" },

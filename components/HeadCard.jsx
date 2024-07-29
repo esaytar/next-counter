@@ -5,13 +5,12 @@ import { useEffect, useState } from 'react'
 
 export default function HeadCard({currentDate}) {
     const [today, setToday] = useState('05.07.2024')
-    const [weeks, setWeeks] = useState(52)
-    const [daysTil, setDaysTil] = useState(365)
+    const [weeks, setWeeks] = useState(0)
+    const [daysTil, setDaysTil] = useState(0)
 
     function findWeeks() {
         const difference = setDiffTime(currentDate)
-        const weeks = Math.round(Math.floor(difference / (1000 * 60 * 60 * 24)) / 7)
-        return weeks
+        return 52 - Math.round(Math.floor(difference / (1000 * 60 * 60 * 24)) / 7)
     }
 
     useEffect(() => {
@@ -19,7 +18,7 @@ export default function HeadCard({currentDate}) {
         setToday(new Date().toLocaleDateString())
         setDaysTil(() => {
             const diff = setDiffTime(currentDate)
-            return Math.floor(diff / (1000 * 60 * 60 * 24))
+            return 365 - Math.floor(diff / (1000 * 60 * 60 * 24))
         })
     }, [today]) 
 
