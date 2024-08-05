@@ -15,12 +15,12 @@ export default function Card({reason, date}) {
     function updateCountdown(date) {
         const diff = setDiffTime(date)
         if (diff <= 0) {
-            setStyles('!bg-gray-200 order-2 grayscale !min-h-40 cursor-default hover:shadow-md')
+            setStyles('!bg-gray-200 order-2 !min-h-40 hover:!shadow-md')
             const now = new Date()
             const target = new Date(date)
             const diffFromNow = now - target
 
-            setDays((prev) => ({...prev, numberDays: Math.ceil(diffFromNow / (1000 * 60 * 60 * 24))}))
+            setDays((prev) => ({...prev, numberDays: Math.floor(diffFromNow / (1000 * 60 * 60 * 24))}))
             // setHours((prev) => ({...prev, numberHours: Math.floor((diffFromNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}))
             // setMinutes((prev) => ({...prev, numberMinutes: Math.floor((diffFromNow % (1000 * 60 * 60)) / (1000 * 60))}))
             // setSeconds((prev) => ({...prev, numberSeconds: Math.floor((diffFromNow % (1000 * 60)) / 1000)}))
@@ -55,19 +55,19 @@ export default function Card({reason, date}) {
 
     return (
         <div className={`${styles} shadow-md bg-white p-4 rounded-xl w-full flex flex-col gap-2.5 items-center min-h-[14.5rem] hover:shadow-xl cursor-pointer`}>
-            <p className="text-2xl font-semibold text-center">{reason}<br/><span className="underline text-red-500">{normalDate}</span></p>
+            <p className="text-2xl font-semibold text-center">{reason}<br/><span className={`underline ${styles == '' ? 'text-red-500' : 'text-gray-500'}`}>{normalDate}</span></p>
             <div className="text-2xl text-center flex flex-col items-center justify-center h-full !font-normal">
-                <div className={`${days.numberDays == 0 ? 'hidden' : 'block'}`}>
-                    {[days.numberDays, days.daysWord].join(' ')}
-                    {styles !== '' ? ' назад' : ''}
+                <div className={``}>
+                    {days.numberDays !== 0 ? (<>
+                        {[days.numberDays, days.daysWord].join(' ')}
+                        {styles !== '' ? ' назад' : ''}
+                    </>) : <span className="text-red-500 font-semibold">СЕГОДНЯ</span>}
                 </div>
-                {styles === '' ? (
-                    <>
-                        <div className={`${hours.numberHours == 0 ? 'hidden' : 'block'}`}>{[hours.numberHours, hours.hoursWord].join(' ')}</div>
-                        <div className={`${minutes.numberMinutes == 0 ? 'hidden' : 'block'}`}>{[minutes.numberMinutes, minutes.minutesWord].join(' ')}</div>
-                        <div>{[seconds.numberSeconds, seconds.secondsWord].join(' ')}</div>
-                    </>
-                ) : ''}
+                {styles === '' ? (<>
+                    <div className={`${hours.numberHours == 0 ? 'hidden' : 'block'}`}>{[hours.numberHours, hours.hoursWord].join(' ')}</div>
+                    <div className={`${minutes.numberMinutes == 0 ? 'hidden' : 'block'}`}>{[minutes.numberMinutes, minutes.minutesWord].join(' ')}</div>
+                    <div>{[seconds.numberSeconds, seconds.secondsWord].join(' ')}</div>
+                </>) : ''}
             </div>
         </div>
     )

@@ -23,7 +23,7 @@ function findNextSunday() {
 export default function Home() {
   const demDate = "2025-07-05 00:00:00"
   const nearestCall = findNextSunday()
-  // const nearestCall = "2024-08-02 13:30:00"
+  // const nearestCall = "2024-08-05 8:30:00"
 
   const dates = [
     { reason: 'повестка', date: "2024-07-02 08:00:00" },
@@ -38,6 +38,7 @@ export default function Home() {
     { reason: '200 дней', date: "2024-12-17 00:00:00" },
     { reason: 'половина службы', date: "2025-01-03 00:00:00" },
     { reason: 'новый год', date: "2025-01-01 00:00:00" },
+    // { reason: '23 февраля', date: "2025-02-23 00:00:00" },
     { reason: '100 дней', date: "2025-03-27 00:00:00" },
     { reason: 'четверть до дембеля', date: "2025-04-04 00:00:00" },
     { reason: 'дембель', date: demDate },
@@ -66,6 +67,6 @@ export default function Home() {
           ))
         }
       </div>
-    </main>  
+    </main>
   );
 }
