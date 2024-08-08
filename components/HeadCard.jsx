@@ -23,9 +23,9 @@ export default function HeadCard({currentDate}) {
     }, [today]) 
 
     return (
-        <div className="shadow-lg w-full p-4 bg-white rounded-xl font-bold text-2xl text-center">
+        <div className="shadow-lg w-full lg:p-4 p-3 bg-white rounded-xl font-bold text-xl lg:text-2xl text-center">
             <h1 className="text-red-500 font-bold">Сегодня: {today}</h1>
-            отсчитываем дни!! <br/>
+            {/* отсчитываем дни!! <br/> */}
             <div>{daysTil} / 365 дней</div>
             <div>{weeks} / 52 недель</div>
         </div>

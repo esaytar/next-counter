@@ -1,0 +1,27 @@
+.dayOfTheWeek {
+    padding: 0 2.5px;
+    text-align: center;
+}
+
+.day {
+    width: 100%;
+    text-align: center;
+    padding: 2.5px;
+}
+
+.day:nth-child(7n + 6), 
+.day:nth-child(7n), 
+.dayOfTheWeek:nth-child(6), 
+.dayOfTheWeek:nth-child(7) { color: #ff0000;}
+
+.passedDates {background-color: #ffcece;}
+
+@media screen and (hover: hover) {
+    .day:hover { background-color: rgb(0, 0, 0, 0.07); cursor: pointer;}
+    .passedDates:hover {background-color: #fcb8b8;}
+}
+
+@media screen and (min-width: 568px) {
+    .day {padding: 5px;}
+    .dayOfTheWeek {padding: 0 5px;}
+}

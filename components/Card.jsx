@@ -54,10 +54,10 @@ export default function Card({reason, date}) {
     }, [])
 
     return (
-        <div className={`${styles} shadow-md bg-white p-4 rounded-xl w-full flex flex-col gap-2.5 items-center min-h-[14.5rem] hover:shadow-xl cursor-pointer`}>
-            <p className="text-2xl font-semibold text-center">{reason}<br/><span className={`underline ${styles == '' ? 'text-red-500' : 'text-gray-500'}`}>{normalDate}</span></p>
-            <div className="text-2xl text-center flex flex-col items-center justify-center h-full !font-normal">
-                <div className={``}>
+        <div className={`${styles} shadow-md bg-white p-3 lg:p-4 rounded-xl w-full flex flex-col gap-2.5 items-center min-h-[14rem] hover:shadow-xl cursor-pointer`}>
+            <p className="text-xl font-medium text-center">{reason}<br/><span className={`underline ${styles == '' ? 'text-red-500' : 'text-gray-500'}`}>{normalDate}</span></p>
+            <div className="text-xl text-center flex flex-col items-center justify-center h-full !font-normal">
+                <div>
                     {days.numberDays !== 0 ? (<>
                         {[days.numberDays, days.daysWord].join(' ')}
                         {styles !== '' ? ' назад' : ''}
