@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import styles from './MonthCard.module.css'
 
+const daysOfTheWeek = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']
+
 export default function MonthCard({month, year, number, dmb}) {
     const [days, setDays] = useState()
     const [currentMonth, setCurrentMonth] = useState()
@@ -43,7 +45,11 @@ export default function MonthCard({month, year, number, dmb}) {
         const iteratedDays = daysArray.map((i, index) => {
             date.setDate(index + 1)
             const diff = date <= new Date() && date >= new Date(dmb)
-            return <div key={index} className={`${styles.day} ${diff && styles.passedDates}`}>{i}</div>
+            const daysTil = Math.floor((date - new Date()) / (1000 * 60 * 60 * 24))
+            const daysSince = Math.ceil((date - new Date(dmb)) / (1000 * 60 * 60 * 24))
+            return <div key={index} 
+                className={`${styles.day} ${diff && styles.passedDates}`} 
+                title={`${daysTil > 0 ? `через ${daysTil} дней` : `${Math.abs(daysTil)} дней назад`} ${daysSince > 0 ? `| ${daysSince}-й день службы` : ''}`}>{i}</div>
         })
         setDays((prev) => [...prev, iteratedDays])
     }
@@ -58,13 +64,9 @@ export default function MonthCard({month, year, number, dmb}) {
             <p className={`font-bold text-center ${currentMonth === number ? 'text-[#ff0000]' : 'text-inherit'}`}>{month} {year}</p>
             <div className="flex flex-col gap-2.5 w-full">
                 <div className="flex font-medium justify-between w-full place-items-center">
-                    <p className={styles.dayOfTheWeek}>пн</p>
-                    <p className={styles.dayOfTheWeek}>вт</p>
-                    <p className={styles.dayOfTheWeek}>ср</p>
-                    <p className={styles.dayOfTheWeek}>чт</p>
-                    <p className={styles.dayOfTheWeek}>пт</p>
-                    <p className={styles.dayOfTheWeek}>сб</p>
-                    <p className={styles.dayOfTheWeek}>вс</p>
+                    {daysOfTheWeek.map((day, index) => (
+                        <p key={index} className={styles.dayOfTheWeek}>{day}</p>
+                    ))}
                 </div>
                 <div className="grid grid-cols-7 place-items-center font-semibold">
                     {days}

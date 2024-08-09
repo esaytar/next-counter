@@ -51,7 +51,7 @@ export default function CalendarSlider() {
                 .swiper {display: flex !important; flex-direction: column; gap: 2rem; overflow: visible !important;}
                 @media (min-width: 1024px) {.swiper {gap: 50px;}}
                 .swiper-pagination {position: relative !important; bottom: 0; top: 0; cursor: inherit !important; display: flex; gap: 10px; align-items: center; justify-content: center;}
-                .swiper-pagination-bullet {width: 9px; height: 9px; margin: 0 !important; background: #fcb8b8 !important;}
+                .swiper-pagination-bullet {width: 9px; height: 9px; margin: 0 !important; background: red !important;}
                 .swiper-pagination-bullet-active {background: red !important;}
             `]
         }
@@ -60,42 +60,6 @@ export default function CalendarSlider() {
     }, [isMobile])
 
     return (
-        // <>
-        //     {isMobile ? (
-        //         <swiper-container
-        //             init="false"
-        //             ref={swiperRef}
-        //             slides-per-view="1"
-        //             pagination="true"
-        //             space-between="15"
-        //             >
-        //             {dmbYear.map((item, index) => (
-        //                 <swiper-slide key={index}>
-        //                     <MonthCard 
-        //                         month={item.month}
-        //                         year={item.year}
-        //                         number={item.number} 
-        //                         dmb={dates[1].date}
-        //                     />  
-        //                 </swiper-slide>
-        //             ))}
-        //         </swiper-container>
-        //     ) : (
-        //         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-2.5 gap-y-5">
-        //             {
-        //                 dmbYear.map((item, index) => (
-        //                     <MonthCard 
-        //                         key={index}
-        //                         month={item.month}
-        //                         year={item.year}
-        //                         number={item.number} 
-        //                         dmb={dates[1].date}
-        //                     />  
-        //                 ))
-        //             }
-        //         </div>
-        //     )}
-        // </>
         <swiper-container
             init="false"
             ref={swiperRef}

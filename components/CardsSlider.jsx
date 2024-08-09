@@ -3,7 +3,6 @@
 import Card from "./Card";
 import { register } from 'swiper/element/bundle'
 import { useRef, useEffect, useState } from 'react'
-
 register()
 
 function findNextSunday() {
@@ -31,8 +30,9 @@ export const dates = [
     { reason: '300 дней', date: "2024-09-08 00:00:00" },
     { reason: 'Четверть службы', date: "2024-10-04 00:00:00" },
     { reason: '200 дней', date: "2024-12-17 00:00:00" },
-    { reason: 'Половина службы', date: "2025-01-03 00:00:00" },
     { reason: 'Новый год', date: "2025-01-01 00:00:00" },,
+    { reason: 'Половина службы', date: "2025-01-03 00:00:00" },
+    { reason: '23 февраля', date: "2025-02-23 00:00:00" },
     { reason: '100 дней', date: "2025-03-27 00:00:00" },
     { reason: 'Четверть до дембеля', date: "2025-04-04 00:00:00" },
     { reason: 'Дембель', date: demDate },
@@ -42,21 +42,13 @@ export const dates = [
 export default function CardsSlider() {
     const swiperRef = useRef(null)
     useEffect(() => {
-        // if (!isMobile) return
-
         const swiperContainer = swiperRef.current
         const params = {
-            breakpoints: {
-                // 455: { slidesPerView: 2 }, 
-                // 640: { slidesPerView: 1 },
-                // 900: { slidesPerView: 2 },
-                // 1300: { slidesPerView: 3 }
-            },
             injectStyles: [`
                 .swiper {display: flex !important; flex-direction: column; gap: 2rem; overflow: visible !important; height: 100% !important;}
                 @media (min-width: 1024px) {.swiper {gap: 50px;}}
                 .swiper-pagination {position: relative !important; bottom: 0; top: 0; cursor: inherit !important; display: flex; gap: 10px; align-items: center; justify-content: center;}
-                .swiper-pagination-bullet {width: 9px; height: 9px; margin: 0 !important; background: #fcb8b8 !important;}
+                .swiper-pagination-bullet {width: 9px; height: 9px; margin: 0 !important; background: #fff !important;}
                 .swiper-pagination-bullet-active {background: red !important;}
             `]
         }
@@ -82,15 +74,14 @@ export default function CardsSlider() {
             init="false"
             ref={swiperRef}
             slides-per-view="1"
-            // pagination="true"
             space-between="15"
             style={{height: '100%'}}
             >
                 {cuttedArray.map((item, index) => (
                     <swiper-slide key={index}>
-                        <div className="flex flex-col justify-between h-full gap-2.5 lg:gap-0">
+                        <div className={`flex flex-col ${item.length < 5 ? 'gap-2' : 'justify-between lg:gap-0 gap-2'} h-full `}>
                             {item.map((i, index) => (
-                                <Card 
+                                <Card
                                     key={index}
                                     date={i.date}
                                     reason={i.reason}

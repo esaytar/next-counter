@@ -23,24 +23,5 @@ export default function Home() {
         <CardsSlider/>
       </div>
     </main>
-    // <main className="flex flex-col gap-2.5 w-full">
-    //   <div className="flex flex-col gap-2.5">
-    //     <HeadCard currentDate={demDate}/>
-    //     <div className="flex gap-2.5 items-start flex-col sm:flex-row">
-    //       <div className="bg-white w-full rounded-xl shadow-lg lg:p-4 p-3 text-lg overflow-hidden">
-    //         <CalendarSlider/>
-    //       </div>
-    //       <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-2.5 pb-2.5 lg:w-3/5 w-full">
-    //         {sortedDates.map((item, index) => (
-    //           <Card 
-    //             key={index}
-    //             date={item.date}
-    //             reason={item.reason}
-    //           />
-    //         ))}
-    //       </div>  
-    //     </div>
-    //   </div>
-    // </main>
   );
 }
