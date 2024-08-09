@@ -15,7 +15,7 @@ export default function Card({reason, date}) {
     function updateCountdown(date) {
         const diff = setDiffTime(date)
         if (diff <= 0) {
-            setStyles('!bg-gray-200 order-2 !min-h-40 hover:!shadow-md')
+            setStyles('!bg-gray-200 order-2')
             const now = new Date()
             const target = new Date(date)
             const diffFromNow = now - target
@@ -54,9 +54,9 @@ export default function Card({reason, date}) {
     }, [])
 
     return (
-        <div className={`${styles} shadow-md bg-white p-3 lg:p-4 rounded-xl w-full flex flex-col gap-2.5 items-center min-h-[14rem] hover:shadow-xl cursor-pointer`}>
-            <p className="text-xl font-medium text-center">{reason}<br/><span className={`underline ${styles == '' ? 'text-red-500' : 'text-gray-500'}`}>{normalDate}</span></p>
-            <div className="text-xl text-center flex flex-col items-center justify-center h-full !font-normal">
+        <div className={`${styles} bg-white p-3 lg:p-4 rounded-xl w-full flex flex-col gap-2.5 items-start cursor-pointer`}>
+            <p className="text-xl font-medium text-start flex items-center"><span className={`mr-2 ${styles == '' ? 'text-red-500' : 'text-gray-500'}`}>{normalDate}</span> | {reason}</p>
+            <div className="text-xl text-start flex gap-2 items-start justify-start h-full !font-normal">
                 <div>
                     {days.numberDays !== 0 ? (<>
                         {[days.numberDays, days.daysWord].join(' ')}

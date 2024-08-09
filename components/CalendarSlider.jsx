@@ -3,7 +3,7 @@
 import { register } from 'swiper/element/bundle'
 import MonthCard from './MonthCard'
 import { useRef, useEffect, useState } from 'react'
-import {dates} from '../app/page'
+import {dates} from './CardsSlider'
 
 register()
 
@@ -36,15 +36,16 @@ export default function CalendarSlider() {
     }, [])
 
     useEffect(() => {
-        if (!isMobile) return
+        // if (!isMobile) return
 
         const swiperContainer = swiperRef.current
         const params = {
             initialSlide: Math.abs(6 - new Date().getMonth()),
             breakpoints: {
-                455: {
-                    slidesPerView: 2
-                }
+                455: { slidesPerView: 2 }, 
+                // 640: { slidesPerView: 1 },
+                900: { slidesPerView: 2 },
+                1300: { slidesPerView: 3 }
             },
             injectStyles: [`
                 .swiper {display: flex !important; flex-direction: column; gap: 2rem; overflow: visible !important;}
@@ -59,41 +60,59 @@ export default function CalendarSlider() {
     }, [isMobile])
 
     return (
-        <>
-            {isMobile ? (
-                <swiper-container
-                    init="false"
-                    ref={swiperRef}
-                    slides-per-view="1"
-                    pagination="true"
-                    space-between="15"
-                    >
-                    {dmbYear.map((item, index) => (
-                        <swiper-slide key={index}>
-                            <MonthCard 
-                                month={item.month}
-                                year={item.year}
-                                number={item.number} 
-                                dmb={dates[1].date}
-                            />  
-                        </swiper-slide>
-                    ))}
-                </swiper-container>
-            ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-2.5 gap-y-5">
-                    {
-                        dmbYear.map((item, index) => (
-                            <MonthCard 
-                                key={index}
-                                month={item.month}
-                                year={item.year}
-                                number={item.number} 
-                                dmb={dates[1].date}
-                            />  
-                        ))
-                    }
-                </div>
-            )}
-        </>
+        // <>
+        //     {isMobile ? (
+        //         <swiper-container
+        //             init="false"
+        //             ref={swiperRef}
+        //             slides-per-view="1"
+        //             pagination="true"
+        //             space-between="15"
+        //             >
+        //             {dmbYear.map((item, index) => (
+        //                 <swiper-slide key={index}>
+        //                     <MonthCard 
+        //                         month={item.month}
+        //                         year={item.year}
+        //                         number={item.number} 
+        //                         dmb={dates[1].date}
+        //                     />  
+        //                 </swiper-slide>
+        //             ))}
+        //         </swiper-container>
+        //     ) : (
+        //         <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-2.5 gap-y-5">
+        //             {
+        //                 dmbYear.map((item, index) => (
+        //                     <MonthCard 
+        //                         key={index}
+        //                         month={item.month}
+        //                         year={item.year}
+        //                         number={item.number} 
+        //                         dmb={dates[1].date}
+        //                     />  
+        //                 ))
+        //             }
+        //         </div>
+        //     )}
+        // </>
+        <swiper-container
+            init="false"
+            ref={swiperRef}
+            slides-per-view="1"
+            pagination="true"
+            space-between="15"
+            >
+            {dmbYear.map((item, index) => (
+                <swiper-slide key={index}>
+                    <MonthCard 
+                        month={item.month}
+                        year={item.year}
+                        number={item.number} 
+                        dmb={dates[1].date}
+                    />  
+                </swiper-slide>
+            ))}
+        </swiper-container>
     )
 }
