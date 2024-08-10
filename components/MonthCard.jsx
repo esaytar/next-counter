@@ -47,9 +47,21 @@ export default function MonthCard({month, year, number, dmb}) {
             const diff = date <= new Date() && date >= new Date(dmb)
             const daysTil = Math.floor((date - new Date()) / (1000 * 60 * 60 * 24))
             const daysSince = Math.ceil((date - new Date(dmb)) / (1000 * 60 * 60 * 24))
+
+            function howMuchDays() {
+                if (daysTil > 0) return `через ${daysTil} дней`
+                else if (daysTil === 0) return `сегодня`
+                else return `${Math.abs(daysTil)} дней назад`
+            }
+
+            function countTilDMB() {
+                if (365 >= daysSince > 0) return `| ${daysSince}-й день службы`
+                else return `| после дембеля не служим`
+            }
+
             return <div key={index} 
                 className={`${styles.day} ${diff && styles.passedDates}`} 
-                title={`${daysTil > 0 ? `через ${daysTil} дней` : `${Math.abs(daysTil)} дней назад`} ${daysSince > 0 ? `| ${daysSince}-й день службы` : ''}`}>{i}</div>
+                title={`${howMuchDays()} ${countTilDMB()}`}>{i}</div>
         })
         setDays((prev) => [...prev, iteratedDays])
     }

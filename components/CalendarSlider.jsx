@@ -20,6 +20,7 @@ const dmbYear = [
     {month: 'Апрель', number: 3, year: 2025},
     {month: 'Май', number: 4, year: 2025},
     {month: 'Июнь', number: 5, year: 2025},
+    {month: 'Июль', number: 6, year: 2025},
 ]
 
 export default function CalendarSlider() {

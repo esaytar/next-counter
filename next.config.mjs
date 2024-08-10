@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: '/meow',
+    // basePath: '/meow',
     output: 'export',
 };
 
