@@ -2,12 +2,12 @@
 
 import Card from "./Card";
 import { register } from 'swiper/element/bundle'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 register()
 
 function findNextSunday() {
     const today = new Date()
-    const daysUntilSunday = (6 - today.getDay()) % 7
+    const daysUntilSunday = (7 - today.getDay()) % 7
     const nextSunday = new Date(today)
     nextSunday.setDate(today.getDate() + daysUntilSunday)
     nextSunday.setHours('21')

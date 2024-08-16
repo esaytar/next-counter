@@ -28,7 +28,7 @@ export default function MonthCard({month, year, number, dmb}) {
         const emptyArray = []
         
         for (let i = 1; i <= dnd - 1; i++) emptyArray.push(" ")
-        const iterated = emptyArray.map((i, index) => <div key={index} className={styles.day}>{i}</div>)
+        const iterated = emptyArray.map((i, index) => <div key={index} className={`${styles.day} ${styles.nullDay}`}>{i}</div>)
         setDays(iterated)
     }
 
