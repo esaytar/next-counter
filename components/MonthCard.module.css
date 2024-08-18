@@ -1,7 +1,6 @@
-.dayOfTheWeek { padding: 0 2.5px; text-align: center;}
+.dayOfTheWeek { padding: 0 2.5px; text-align: center; margin-bottom: 0.625rem;}
 
 .day {width: 100%; text-align: center; padding: 2.5px;}
-
 
 .day:nth-child(7n + 6), 
 .day:nth-child(7n), 
