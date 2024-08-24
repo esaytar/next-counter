@@ -57,9 +57,9 @@ export default function Card({reason, date}) {
         <div className={`${styles} bg-white p-3 lg:p-4 rounded-xl w-full flex flex-col gap-2.5 items-start cursor-pointer`}>
             <p className="text-xl font-medium text-start flex items-center"><span className={`mr-2 ${styles == '' ? 'text-red-500' : 'text-gray-500'}`}>{normalDate}</span> | {reason}</p>
             <div className="text-xl text-start flex gap-2 items-start justify-start h-full !font-normal">
-                <div>
-                    {days.numberDays !== 0 ? (<>
-                        {[days.numberDays, days.daysWord].join(' ')}
+                <div className={new Date().getDate() === new Date(date).getDate() || days.numberDays > 0 ? 'block' : 'hidden'}>
+                    {new Date().getDate() !== new Date(date).getDate() ? (<>
+                        {days.numberDays !== 0 ? [days.numberDays, days.daysWord].join(' ') : ''}
                         {styles !== '' ? ' назад' : ''}
                     </>) : <span className="text-red-500 font-semibold">СЕГОДНЯ</span>}
                 </div>
