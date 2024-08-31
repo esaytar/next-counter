@@ -50,7 +50,7 @@ export default function MonthCard({month, year, number, dmb}) {
 
             function howMuchDays() {
                 if (daysTil > 0) return `через ${daysTil} дней`
-                else if (daysTil <= 0) return `сегодня`
+                else if (daysTil === 0) return `сегодня`
                 else return `${Math.abs(daysTil)} дней назад`
             }
 
