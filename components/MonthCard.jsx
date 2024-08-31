@@ -15,15 +15,15 @@ export default function MonthCard({month, year, number, dmb}) {
         setCurrentMonth(today.getMonth())
     }, [])
 
-    function getLastDayOfMonth(number, year) {
+    function getLastDayOfMonth() {
         return new Date(year, number + 1, 0).getDate()
     }
 
-    function setEmptyDiv(number, year) {
+    function setEmptyDiv() {
         const nullDate = new Date()
-        nullDate.setMonth(number)
+        nullDate.setMonth(number, 1)
         nullDate.setFullYear(year)
-        nullDate.setDate(1)
+        console.log(nullDate)
         const dnd = nullDate.getDay() === 0 ? 7 : nullDate.getDay()
         const emptyArray = []
         
@@ -32,12 +32,12 @@ export default function MonthCard({month, year, number, dmb}) {
         setDays(iterated)
     }
 
-    function getDays(number, year) {
+    function getDays() {
         const date = new Date()
         date.setFullYear(year)
-        date.setMonth(number)
+        date.setMonth(number, 1)
 
-        const daysInMonth = getLastDayOfMonth(number, year)
+        const daysInMonth = getLastDayOfMonth()
         const daysArray = []
 
         for (let i = 1; i <= daysInMonth; i++) daysArray.push(i)
@@ -50,7 +50,7 @@ export default function MonthCard({month, year, number, dmb}) {
 
             function howMuchDays() {
                 if (daysTil > 0) return `через ${daysTil} дней`
-                else if (daysTil === 0) return `сегодня`
+                else if (daysTil <= 0) return `сегодня`
                 else return `${Math.abs(daysTil)} дней назад`
             }
 
@@ -68,8 +68,8 @@ export default function MonthCard({month, year, number, dmb}) {
     }
 
     useEffect(() => {
-        setEmptyDiv(number, year)
-        getDays(number, year)
+        setEmptyDiv()
+        getDays()
     }, [])
 
     return (

@@ -37,8 +37,6 @@ export default function CalendarSlider() {
     }, [])
 
     useEffect(() => {
-        // if (!isMobile) return
-
         const swiperContainer = swiperRef.current
         const params = {
             initialSlide: Math.abs(6 - new Date().getMonth()),
