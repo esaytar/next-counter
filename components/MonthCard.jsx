@@ -23,7 +23,6 @@ export default function MonthCard({month, year, number, dmb}) {
         const nullDate = new Date()
         nullDate.setMonth(number, 1)
         nullDate.setFullYear(year)
-        console.log(nullDate)
         const dnd = nullDate.getDay() === 0 ? 7 : nullDate.getDay()
         const emptyArray = []
         

@@ -47,7 +47,7 @@ export default function CalendarSlider() {
                 1300: { slidesPerView: 3 }
             },
             injectStyles: [`
-                .swiper {display: flex !important; flex-direction: column; gap: 2rem; overflow: visible !important;}
+                .swiper {display: flex !important; flex-direction: column; gap: 1.5rem; overflow: visible !important;}
                 @media (min-width: 1024px) {.swiper {gap: 50px;}}
                 .swiper-pagination {position: relative !important; bottom: 0; top: 0; cursor: inherit !important; display: flex; gap: 10px; align-items: center; justify-content: center;}
                 .swiper-pagination-bullet {width: 9px; height: 9px; margin: 0 !important; background: red !important;}
