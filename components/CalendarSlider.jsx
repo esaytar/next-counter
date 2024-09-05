@@ -39,9 +39,9 @@ export default function CalendarSlider() {
     useEffect(() => {
         const swiperContainer = swiperRef.current
         const params = {
-            initialSlide: Math.abs(6 - new Date().getMonth()),
             breakpoints: {
-                455: { slidesPerView: 2 }, 
+                0: { initialSlide: Math.abs(6 - new Date().getMonth())},
+                455: { slidesPerView: 2, initialSlide: Math.abs(8 - new Date().getMonth()),  }, 
                 // 640: { slidesPerView: 1 },
                 900: { slidesPerView: 2 },
                 1300: { slidesPerView: 3 }
