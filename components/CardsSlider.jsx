@@ -10,11 +10,16 @@ function findNextSunday() {
     const daysUntilSunday = (7 - today.getDay()) % 7
     const nextSunday = new Date(today)
     nextSunday.setDate(today.getDate() + daysUntilSunday)
-    nextSunday.setHours('21')
-    nextSunday.setMinutes('00')
-    nextSunday.setSeconds('00')
-    nextSunday.setMilliseconds('00')
+    nextSunday.setHours(21, 0, 0, 0)
     return nextSunday
+}
+
+function findNextMonth() {
+    const today = new Date()
+    const nextMonthDate = new Date()
+    nextMonthDate.setMonth(today.getMonth() + 1, 5)
+    nextMonthDate.setHours(0, 0, 0, 0)
+    return nextMonthDate
 }
   
 export const demDate = "2025-07-05 00:00:00"
@@ -39,7 +44,8 @@ export const dates = [
     { reason: 'Четверть до дембеля', date: "2025-04-04 00:00:00" },
     { reason: '300 дней после призыва', date: "2025-05-01 00:00:00" },
     { reason: 'Дембель', date: demDate },
-    { reason: 'Ближайший звонок', date: nearestCall },
+    // { reason: 'Ближайший звонок', date: nearestCall },
+    { reason: `${new Date().getMonth() - new Date(demDate).getMonth() + 1} месяца после призыва`, date: findNextMonth() },
 ]
 
 export default function CardsSlider() {
