@@ -17,7 +17,7 @@ function findNextSunday() {
 function findNextMonth() {
     const today = new Date()
     const nextMonthDate = new Date()
-    nextMonthDate.setMonth(today.getMonth() + 1, 5)
+    today.getDate() < 5 ? nextMonthDate.setMonth(today.getMonth(), 5) : nextMonthDate.setMonth(today.getMonth() + 1, 5)
     nextMonthDate.setHours(0, 0, 0, 0)
     return nextMonthDate
 }

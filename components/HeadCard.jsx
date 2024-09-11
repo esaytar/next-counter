@@ -10,7 +10,7 @@ export default function HeadCard({currentDate}) {
 
     function findWeeks() {
         const difference = setDiffTime(currentDate)
-        return 52 - Math.round(Math.floor(difference / (1000 * 60 * 60 * 24)) / 7)
+        return 52 - Math.ceil(Math.floor(difference / (1000 * 60 * 60 * 24)) / 7)
     }
 
     useEffect(() => {
