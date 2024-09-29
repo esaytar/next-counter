@@ -17,7 +17,12 @@ function findNextSunday() {
 function findNextMonth() {
     const today = new Date()
     const nextMonthDate = new Date()
-    today.getDate() < 5 ? nextMonthDate.setMonth(today.getMonth(), 5) : nextMonthDate.setMonth(today.getMonth() + 1, 5)
+    if (today.getMonth() === 11) {
+        nextMonthDate.setMonth(0, 5)
+    } else {
+        if (today.getDate() < 5) nextMonthDate.setMonth(today.getMonth(), 5)
+        else nextMonthDate.setMonth(today.getMonth() + 1, 5)
+    }
     nextMonthDate.setHours(0, 0, 0, 0)
     return nextMonthDate
 }
@@ -45,7 +50,7 @@ export const dates = [
     { reason: '300 дней после призыва', date: "2025-05-01 00:00:00" },
     { reason: 'Дембель', date: demDate },
     // { reason: 'Ближайший звонок', date: nearestCall },
-    { reason: `${new Date().getMonth() - new Date(demDate).getMonth() + 1} месяца после призыва`, date: findNextMonth() },
+    { reason: `${Math.abs(new Date().getMonth() - new Date(demDate).getMonth()) + 1} месяца после призыва`, date: findNextMonth() },
 ]
 
 export default function CardsSlider() {
@@ -53,12 +58,16 @@ export default function CardsSlider() {
     useEffect(() => {
         const swiperContainer = swiperRef.current
         const params = {
+            // breakpoints: {
+            //     // 0: {pagination: true},
+            //     768: {pagination: false}
+            // },
             injectStyles: [`
                 .swiper {display: flex !important; flex-direction: column; gap: 2rem; overflow: visible !important; height: 100% !important;}
                 @media (min-width: 1024px) {.swiper {gap: 50px;}}
                 .swiper-pagination {position: relative !important; bottom: 0; top: 0; cursor: inherit !important; display: flex; gap: 10px; align-items: center; justify-content: center;}
-                .swiper-pagination-bullet {width: 9px; height: 9px; margin: 0 !important; background: #fff !important;}
-                .swiper-pagination-bullet-active {background: red !important;}
+                .swiper-pagination-bullet {width: 9px; height: 9px; margin: 0 !important; background: #fff !important; opacity: var(--swiper-pagination-bullet-inactive-opacity, 0.35)}
+                .swiper-pagination-bullet-active {background: red !important; opacity: var(--swiper-pagination-bullet-opacity, 1)}
             `]
         }
         Object.assign(swiperContainer, params)

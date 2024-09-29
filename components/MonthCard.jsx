@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import styles from './MonthCard.module.css'
+import {demDate} from './CardsSlider'
 
 const daysOfTheWeek = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']
 
-export default function MonthCard({month, year, number, dmb}) {
+export default function MonthCard({month, year, number, startDate}) {
     const [days, setDays] = useState()
     const [currentMonth, setCurrentMonth] = useState()
     const [today, setToday] = useState(new Date())
@@ -43,9 +44,10 @@ export default function MonthCard({month, year, number, dmb}) {
 
         const iteratedDays = daysArray.map((i, index) => {
             date.setDate(index + 1)
-            const diff = date <= new Date() && date >= new Date(dmb)
+            const period = date >= new Date(startDate) && date <= new Date(demDate).setDate(6)
+            const diff = date <= new Date() && date >= new Date(startDate)
             const daysTil = Math.floor((date - new Date()) / (1000 * 60 * 60 * 24))
-            const daysSince = Math.ceil((date - new Date(dmb)) / (1000 * 60 * 60 * 24))
+            const daysSince = Math.ceil((date - new Date(startDate)) / (1000 * 60 * 60 * 24))
 
             function howMuchDays() {
                 if (daysTil > 0) return `через ${daysTil} дней`
@@ -57,10 +59,10 @@ export default function MonthCard({month, year, number, dmb}) {
                 if (365 >= daysSince && daysSince > 0) return `| ${daysSince}-й день службы`
                 else if (daysSince <= 0) return ``
                 else return `| после дембеля не служим`
-            }
+            }     
 
             return <div key={index} 
-                className={`${styles.day} ${diff && styles.passedDates}`} 
+                className={`${styles.day} ${diff && styles.passedDates} ${!period && styles.notIncludedDay}`} 
                 title={`${howMuchDays()} ${countTilDMB()}`}>{i}</div>
         })
         setDays((prev) => [...prev, iteratedDays])

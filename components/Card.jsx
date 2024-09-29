@@ -56,7 +56,7 @@ export default function Card({reason, date}) {
     return (
         <div className={`${styles} bg-white p-3 lg:p-4 rounded-xl w-full flex flex-col gap-2.5 items-start cursor-pointer`}>
             <p className="text-xl font-medium text-start flex items-center break-words flex-wrap"><span className={`mr-2 ${styles == '' ? 'text-red-500' : 'text-gray-500'}`}>{normalDate}</span> | {reason}</p>
-            <div className="text-xl text-start flex gap-2 items-start justify-start h-full !font-normal flex-wrap">
+            <div className="text-xl text-start flex gap-1 sm:gap-2 items-start justify-start h-full !font-normal flex-wrap">
                 <div className={((new Date().getDate() === new Date(date).getDate()) && (new Date().getMonth() === new Date(date).getMonth())) || days.numberDays > 0 ? 'block' : 'hidden'}>
                     {(new Date().getDate() === new Date(date).getDate()) && (new Date().getMonth() === new Date(date).getMonth()) ? 
                         <span className="text-red-500 font-semibold">СЕГОДНЯ</span> 

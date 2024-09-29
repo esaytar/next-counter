@@ -2,6 +2,8 @@
 
 .day {width: 100%; text-align: center; padding: 2.5px;}
 
+.notIncludedDay {color: rgba(0, 0, 0, 0.511) !important; background-color: #f1f1f1;}
+
 .day:nth-child(7n + 6), 
 .day:nth-child(7n), 
 .dayOfTheWeek:nth-child(6), 
@@ -10,9 +12,9 @@
 .passedDates {background-color: rgb(255 0 0 / 20%);}
 
 @media screen and (hover: hover) {
-    .day:hover { background-color: rgb(0, 0, 0, 0.07); cursor: pointer;}
-    .nullDay:hover { background-color: inherit; cursor: auto;}
-    .passedDates:hover {background-color: #fcb8b8;}
+    .day:hover { background-color: rgb(0, 0, 0, 0.07); cursor: pointer; }
+    .nullDay:hover { background-color: inherit; cursor: auto; }
+    .passedDates:hover { background-color: #fcb8b8; }
 }
 
 @media screen and (min-width: 568px) {

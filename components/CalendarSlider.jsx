@@ -72,7 +72,7 @@ export default function CalendarSlider() {
                         month={item.month}
                         year={item.year}
                         number={item.number} 
-                        dmb={dates[1].date}
+                        startDate={dates[1].date}
                     />  
                 </swiper-slide>
             ))}
