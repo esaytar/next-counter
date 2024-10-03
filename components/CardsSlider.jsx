@@ -14,20 +14,29 @@ function findNextSunday() {
     return nextSunday
 }
 
-function findNextMonth() {
+function findNextMonth(data) {
     const today = new Date()
     const nextMonthDate = new Date()
+    let monthsCount = 0
     if (today.getMonth() === 11) {
         nextMonthDate.setMonth(0, 5)
     } else {
-        if (today.getDate() < 5) nextMonthDate.setMonth(today.getMonth(), 5)
-        else nextMonthDate.setMonth(today.getMonth() + 1, 5)
+        if (today.getDate() < 5) {
+            monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth())
+            nextMonthDate.setMonth(today.getMonth(), 5)
+        }
+        else {
+            monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth()) + 1
+            nextMonthDate.setMonth(today.getMonth() + 1, 5)
+        }
     }
     nextMonthDate.setHours(0, 0, 0, 0)
-    return nextMonthDate
+
+    return [nextMonthDate, monthsCount]
 }
-  
+
 export const demDate = "2025-07-05 00:00:00"
+const [nextMonthDate, monthsCount] = findNextMonth(demDate)
 const nearestCall = findNextSunday()
 export const dates = [
     { reason: 'Повестка', date: "2024-07-02 08:00:00" },
@@ -50,7 +59,7 @@ export const dates = [
     { reason: '300 дней после призыва', date: "2025-05-01 00:00:00" },
     { reason: 'Дембель', date: demDate },
     // { reason: 'Ближайший звонок', date: nearestCall },
-    { reason: `${Math.abs(new Date().getMonth() - new Date(demDate).getMonth()) + 1} месяца после призыва`, date: findNextMonth() },
+    { reason: `${monthsCount} месяца после призыва`, date: nextMonthDate },
 ]
 
 export default function CardsSlider() {
