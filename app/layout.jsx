@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="clock.png" sizes="any" />
       </head>
-      <body className={`select-none w-full bg-red-300 p-2.5 text-[#222222] flex overflow-hidden`}>
+      <body className={`select-none w-full bg-red-300 p-2.5 text-[#222222] flex`}>
         {children}
       </body>
     </html>

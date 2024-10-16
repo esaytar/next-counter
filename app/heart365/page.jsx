@@ -1,4 +1,6 @@
+'use client'
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 const yearArray = [
     [null, null, null, null, 1, 2, 3, null, null, null, null, null, null, null, null, null, 4, 5, 6, null, null, null, null],
@@ -29,9 +31,13 @@ for (let i = 0; i < fullNumbersArray.length; i += 23) {
 yearArray.splice(5, 0, cuttedNumbers.flat())
 
 export default function page() { 
+    const [diff, setDiff] = useState()
     const today = new Date()
     const callDay = new Date('2024-07-05 00:00:00')
-    const diff = Math.round((today - callDay) / (1000 * 60 * 60 * 24))
+
+    useEffect(() => {
+        setDiff(Math.round((today - callDay) / (1000 * 60 * 60 * 24)))
+    }, [today.getDate()])
 
     return (
         <div className='bg-white w-full h-full rounded-xl lg:p-4 p-3 flex items-center text-base relative'>
@@ -43,7 +49,7 @@ export default function page() {
             <div className='m-auto lg:w-8/12 grid grid-cols-[repeat(23,_1fr)] grid-rows-[repeat(22,_minmax(0,_1fr))] overflow-x-scroll lg:overflow-hidden'>
                 {yearArray.map((item) => (
                     item.map((i, index) => (
-                        i !== null ? <div key={index} className={`border border-black text-right ${diff > i ? 'bg-red-600' : ''}`}>{i}</div> : <div key={index}></div>
+                        i !== null ? <div key={index} className={`border border-black text-right cursor-pointer ${diff > i ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-gray-200'}`}>{i}</div> : <div key={index}></div>
                     ))
                 ))}
             </div>
