@@ -26,7 +26,7 @@ for (let i = 67; i < 251; i++) {
 
 const cuttedNumbers = []
 for (let i = 0; i < fullNumbersArray.length; i += 23) {
-    cuttedNumbers.push(fullNumbersArray.slice(i, i - 23))
+    cuttedNumbers.push(fullNumbersArray.slice(i, i + 23))
 } 
 yearArray.splice(5, 0, cuttedNumbers.flat())
 
