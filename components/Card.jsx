@@ -18,6 +18,7 @@ export default function Card({reason, date}) {
             setStyles('!bg-gray-200 order-2')
             const now = new Date()
             const target = new Date(date)
+            target.setHours(0, 0, 0, 0)
             const diffFromNow = now - target
 
             setDays((prev) => ({...prev, numberDays: Math.floor(diffFromNow / (1000 * 60 * 60 * 24))}))
