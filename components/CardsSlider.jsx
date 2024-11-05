@@ -59,7 +59,7 @@ export const dates = [
     { reason: '300 дней после призыва', date: "2025-05-01 00:00:00" },
     { reason: 'Дембель', date: demDate },
     // { reason: 'Ближайший звонок', date: nearestCall },
-    { reason: `${monthsCount} месяца после призыва`, date: nextMonthDate },
+    { reason: `${monthsCount} месяцев после призыва`, date: nextMonthDate },
 ]
 
 export default function CardsSlider() {
