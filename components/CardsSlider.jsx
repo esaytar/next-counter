@@ -18,18 +18,19 @@ function findNextMonth(data) {
     const today = new Date()
     const nextMonthDate = new Date()
     let monthsCount = 0
-    if (today.getMonth() === 11) {
+    if (today.getMonth() === 11 && today.getDate() > 5) {
         nextMonthDate.setMonth(0, 5)
+        nextMonthDate.setFullYear(2025)
+    } 
+
+    if (today.getDate() < 5) {
+        monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth())
+        nextMonthDate.setMonth(today.getMonth(), 5)
     } else {
-        if (today.getDate() < 5) {
-            monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth())
-            nextMonthDate.setMonth(today.getMonth(), 5)
-        }
-        else {
-            monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth()) + 1
-            nextMonthDate.setMonth(today.getMonth() + 1, 5)
-        }
+        monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth()) + 1
+        nextMonthDate.setMonth(today.getMonth() + 1, 5)
     }
+
     nextMonthDate.setHours(0, 0, 0, 0)
 
     return [nextMonthDate, monthsCount]
