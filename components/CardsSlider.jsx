@@ -62,7 +62,7 @@ export const dates = [
     { reason: `${monthsCount} месяцев после призыва`, date: nextMonthDate },
 ]
 
-export default function CardsSlider() {
+export default function CardsSlider({state}) {
     const swiperRef = useRef(null)
     useEffect(() => {
         const swiperContainer = swiperRef.current
@@ -106,7 +106,7 @@ export default function CardsSlider() {
             >
                 {cuttedArray.map((item, index) => (
                     <swiper-slide key={index}>
-                        <div className={`flex flex-col ${item.length < 5 ? 'gap-2' : 'justify-between lg:gap-0 gap-2'} h-full `}>
+                        <div className={`flex flex-col ${item.length < 5 || !state ? 'gap-2' : 'justify-between lg:gap-0 gap-2'} h-full `}>
                             {item.map((i, index) => (
                                 <Card
                                     key={index}

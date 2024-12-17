@@ -9,7 +9,7 @@
 .dayOfTheWeek:nth-child(6), 
 .dayOfTheWeek:nth-child(7) { color: #ff0000;}
 
-.passedDates {background-color: rgb(255 0 0 / 20%);}
+.passedDates {background-color: #ff000033;}
 
 @media screen and (hover: hover) {
     .day:hover { background-color: rgb(0, 0, 0, 0.07); cursor: pointer; }

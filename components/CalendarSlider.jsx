@@ -23,9 +23,9 @@ const dmbYear = [
     {month: 'Июль', number: 6, year: 2025},
 ]
 
-export default function CalendarSlider() {
+export default function CalendarSlider({state}) {
     const swiperRef = useRef(null)
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
         function handleResize() {
@@ -37,6 +37,7 @@ export default function CalendarSlider() {
     }, [])
 
     useEffect(() => {
+        if (!swiperRef) return 
         const swiperContainer = swiperRef.current
         const params = {
             initialSlide: Math.abs(7 - new Date().getMonth()),
@@ -59,23 +60,38 @@ export default function CalendarSlider() {
     }, [isMobile])
 
     return (
-        <swiper-container
-            init="false"
-            ref={swiperRef}
-            slides-per-view="1"
-            pagination="true"
-            space-between="15"
-            >
-            {dmbYear.map((item, index) => (
-                <swiper-slide key={index}>
+        <>
+            <div className={`${state ? 'block' : 'hidden'}`}>
+                <swiper-container
+                    init="false"
+                    ref={swiperRef}
+                    slides-per-view="1"
+                    pagination="true"
+                    space-between="15"
+                    >
+                    {dmbYear.map((item, index) => (
+                        <swiper-slide key={index}>
+                            <MonthCard 
+                                month={item.month}
+                                year={item.year}
+                                number={item.number} 
+                                startDate={dates[1].date}
+                            />  
+                        </swiper-slide>
+                    ))}
+                </swiper-container>
+            </div>
+            <div className={`grid-cols-3 w-full gap-4 ${state ? 'hidden' : 'grid'}`}>
+                {dmbYear.map((item, index) => (
                     <MonthCard 
+                        key={index}
                         month={item.month}
                         year={item.year}
                         number={item.number} 
                         startDate={dates[1].date}
                     />  
-                </swiper-slide>
-            ))}
-        </swiper-container>
+                ))}
+            </div>
+        </>
     )
 }
