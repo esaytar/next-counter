@@ -26,7 +26,7 @@ export default function Home() {
             <CalendarSlider state={isSlider}/>
           </div>
       </div>
-      <div className={`lg:w-full overflow-x-hidden ${isSlider ? 'h-full' : 'lg:w-1/2'}`}>
+      <div className={`overflow-x-hidden ${isSlider ? 'h-full lg:w-full' : 'lg:w-1/2'}`}>
         <CardsSlider state={isSlider}/>
       </div>
     </main>

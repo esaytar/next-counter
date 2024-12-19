@@ -61,7 +61,7 @@ export default function CalendarSlider({state}) {
 
     return (
         <>
-            <div className={`${state ? 'block' : 'hidden'}`}>
+            <div className={state ? 'block' : 'hidden'}>
                 <swiper-container
                     init="false"
                     ref={swiperRef}

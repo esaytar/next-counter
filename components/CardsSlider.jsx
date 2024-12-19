@@ -41,11 +41,11 @@ const nearestCall = findNextSunday()
 export const dates = [
     { reason: 'Повестка', date: "2024-07-02 08:00:00" },
     { reason: 'Призыв', date: "2024-07-05 00:00:00" },
-    { reason: 'Двухлетие знакомства', date: "2024-07-18 20:55:00" },
-    { reason: 'Кошачий день', date: "2024-07-29 00:00:00" },
+    // { reason: 'Двухлетие знакомства', date: "2024-07-18 20:55:00" },
+    // { reason: 'Кошачий день', date: "2024-07-29 00:00:00" },
     { reason: 'Присяга', date: "2024-08-02 09:00:00" },
-    { reason: 'Рыбий день', date: "2024-08-29 00:00:00" },
-    { reason: 'Годовщина', date: "2024-09-06 00:00:00" },
+    // { reason: 'Рыбий день', date: "2024-08-29 00:00:00" },
+    // { reason: 'Годовщина', date: "2024-09-06 00:00:00" },
     { reason: '300 дней до дембеля', date: "2024-09-08 00:00:00" },
     { reason: 'Четверть службы', date: "2024-10-04 00:00:00" },
     { reason: '100 дней после призыва', date: "2024-10-13 00:00:00" },
@@ -53,7 +53,7 @@ export const dates = [
     { reason: 'Новый год', date: "2025-01-01 00:00:00" },,
     { reason: 'Половина службы', date: "2025-01-03 00:00:00" },
     { reason: '200 дней после призыва', date: "2025-01-21 00:00:00" },
-    { reason: '23 февраля', date: "2025-02-23 00:00:00" },
+    // { reason: '23 февраля', date: "2025-02-23 00:00:00" },
     { reason: '100 дней до дембеля', date: "2025-03-27 00:00:00" },
     { reason: 'Четверть до дембеля', date: "2025-04-04 00:00:00" },
     { reason: '300 дней после призыва', date: "2025-05-01 00:00:00" },
@@ -97,26 +97,38 @@ export default function CardsSlider({state}) {
     } 
 
     return (
-        <swiper-container
-            init="false"
-            ref={swiperRef}
-            slides-per-view="1"
-            space-between="15"
-            style={{height: '100%'}}
-            >
-                {cuttedArray.map((item, index) => (
-                    <swiper-slide key={index}>
-                        <div className={`flex flex-col ${item.length < 5 || !state ? 'gap-2' : 'justify-between lg:gap-0 gap-2'} h-full `}>
-                            {item.map((i, index) => (
-                                <Card
-                                    key={index}
-                                    date={i.date}
-                                    reason={i.reason}
-                                />
-                            ))}
-                        </div>
-                    </swiper-slide>
-                ))}
-        </swiper-container>
+        <>
+            <div className={`h-full ${state ? 'block' : 'hidden'}`}>
+                <swiper-container
+                    init="false"
+                    ref={swiperRef}
+                    slides-per-view="1"
+                    space-between="15"
+                    style={{height: '100%'}}
+                    >
+                        {cuttedArray.map((item, index) => (
+                            <swiper-slide key={index}>
+                                <div className={`flex flex-col ${item.length < 5 || !state ? 'gap-2' : 'justify-between lg:gap-0 gap-2'} h-full `}>
+                                    {item.map((i, index) => (
+                                        <Card
+                                            key={index}
+                                            date={i.date}
+                                            reason={i.reason}
+                                        />
+                                    ))}
+                                </div>
+                            </swiper-slide>
+                        ))}
+                </swiper-container>
+            </div>
+            <div className={`h-full flex-col gap-2 ${state ? 'hidden' : 'flex'}`}>
+                {sortedDates.map((item, index) => (
+                    <Card
+                        key={index}
+                        date={item.date}
+                        reason={item.reason}
+                />))}
+            </div>
+        </>
     )
 }
