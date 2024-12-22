@@ -3,7 +3,7 @@
 import CalendarSlider from "@/components/CalendarSlider";
 import CardsSlider from "@/components/CardsSlider";
 import HeadCard from "@/components/HeadCard";
-import { demDate } from "@/components/CardsSlider";
+import { DEM_DATE } from "../data/dates"
 import { useState } from "react";
 
 export function setDiffTime(date) {
@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <main className="flex flex-col md:flex-row gap-2.5 w-full ">
       <div className={`flex flex-col gap-2.5 md:w-3/6 ${isSlider ? 'xl:w-8/12' : 'xl:w-full'} relative`}>
-        <HeadCard currentDate={demDate}/>
+        <HeadCard currentDate={DEM_DATE}/>
           <button className="hidden absolute top-0 right-0 bg-[#ffcccc] px-3 py-1 cursor-pointer z-10 rounded-md text-[#ff0000] 
             hover:bg-[#fcb8b8] lg:m-4 m-3 lg:block" onClick={() => {setIsSlider(!isSlider)}}>Сменить</button>
           <div className="bg-white w-full rounded-xl lg:p-5 p-3 text-lg overflow-hidden">

@@ -3,7 +3,7 @@
 import { register } from 'swiper/element/bundle'
 import MonthCard from './MonthCard'
 import { useRef, useEffect, useState } from 'react'
-import {dates} from './CardsSlider'
+import {dates} from '../data/dates'
 
 register()
 

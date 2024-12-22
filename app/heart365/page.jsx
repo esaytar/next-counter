@@ -1,6 +1,7 @@
 'use client'
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { CALL_DATE } from "@/data/dates"
 
 const yearArray = [
     [null, null, null, null, 1, 2, 3, null, null, null, null, null, null, null, null, null, 4, 5, 6, null, null, null, null],
@@ -33,7 +34,7 @@ yearArray.splice(5, 0, cuttedNumbers.flat())
 export default function page() { 
     const [diff, setDiff] = useState()
     const today = new Date()
-    const callDay = new Date('2024-07-05 00:00:00')
+    const callDay = new Date(CALL_DATE)
 
     useEffect(() => {
         setDiff(Math.round((today - callDay) / (1000 * 60 * 60 * 24)))

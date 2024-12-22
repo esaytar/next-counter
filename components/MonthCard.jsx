@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import styles from './MonthCard.module.css'
-import {demDate} from './CardsSlider'
+import {DEM_DATE} from '../data/dates'
 
 const daysOfTheWeek = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']
 
@@ -44,7 +44,7 @@ export default function MonthCard({month, year, number, startDate}) {
 
         const iteratedDays = daysArray.map((i, index) => {
             date.setDate(index + 1)
-            const period = date >= new Date(startDate) && date <= new Date(demDate).setDate(6)
+            const period = date >= new Date(startDate) && date <= new Date(DEM_DATE).setDate(new Date(DEM_DATE).getDate() + 1)
             const diff = date <= new Date() && date >= new Date(startDate)
             const daysTil = Math.floor((date - new Date()) / (1000 * 60 * 60 * 24))
             const daysSince = Math.ceil((date - new Date(startDate)) / (1000 * 60 * 60 * 24))
@@ -56,7 +56,7 @@ export default function MonthCard({month, year, number, startDate}) {
             }
 
             function countTilDMB() {
-                if (365 >= daysSince && daysSince > 0) return `| ${daysSince}-й день службы`
+                if (366 >= daysSince && daysSince > 0) return `| ${daysSince}-й день службы`
                 else if (daysSince <= 0) return ``
                 else return `| после дембеля не служим`
             }     

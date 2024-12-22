@@ -3,64 +3,8 @@
 import Card from "./Card";
 import { register } from 'swiper/element/bundle'
 import { useRef, useEffect } from 'react'
+import { dates } from '../data/dates'
 register()
-
-function findNextSunday() {
-    const today = new Date()
-    const daysUntilSunday = (7 - today.getDay()) % 7
-    const nextSunday = new Date(today)
-    nextSunday.setDate(today.getDate() + daysUntilSunday)
-    nextSunday.setHours(21, 0, 0, 0)
-    return nextSunday
-}
-
-function findNextMonth(data) {
-    const today = new Date()
-    const nextMonthDate = new Date()
-    let monthsCount = 0
-    // if (today.getMonth() === 11 && today.getDate() > 5) {
-    //     nextMonthDate.setMonth(0, 5)
-    // } 
-
-    if (today.getDate() < 5) {
-        monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth())
-        nextMonthDate.setMonth(today.getMonth(), 5)
-    } else {
-        monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth()) + 1
-        nextMonthDate.setMonth(today.getMonth() + 1, 5)
-    }
-
-    nextMonthDate.setHours(0, 0, 0, 0)
-
-    return [nextMonthDate, monthsCount]
-}
-
-export const demDate = "2025-07-05 00:00:00"
-const [nextMonthDate, monthsCount] = findNextMonth(demDate)
-const nearestCall = findNextSunday()
-export const dates = [
-    { reason: 'Повестка', date: "2024-07-02 08:00:00" },
-    { reason: 'Призыв', date: "2024-07-05 00:00:00" },
-    // { reason: 'Двухлетие знакомства', date: "2024-07-18 20:55:00" },
-    // { reason: 'Кошачий день', date: "2024-07-29 00:00:00" },
-    { reason: 'Присяга', date: "2024-08-02 09:00:00" },
-    // { reason: 'Рыбий день', date: "2024-08-29 00:00:00" },
-    // { reason: 'Годовщина', date: "2024-09-06 00:00:00" },
-    { reason: '300 дней до дембеля', date: "2024-09-08 00:00:00" },
-    { reason: 'Четверть службы', date: "2024-10-04 00:00:00" },
-    { reason: '100 дней после призыва', date: "2024-10-13 00:00:00" },
-    { reason: '200 дней до дембеля', date: "2024-12-17 00:00:00" },
-    { reason: 'Новый год', date: "2025-01-01 00:00:00" },,
-    { reason: 'Половина службы', date: "2025-01-03 00:00:00" },
-    { reason: '200 дней после призыва', date: "2025-01-21 00:00:00" },
-    // { reason: '23 февраля', date: "2025-02-23 00:00:00" },
-    { reason: '100 дней до дембеля', date: "2025-03-27 00:00:00" },
-    { reason: 'Четверть до дембеля', date: "2025-04-04 00:00:00" },
-    { reason: '300 дней после призыва', date: "2025-05-01 00:00:00" },
-    { reason: 'Дембель', date: demDate },
-    // { reason: 'Ближайший звонок', date: nearestCall },
-    { reason: `${monthsCount} месяцев после призыва`, date: nextMonthDate },
-]
 
 export default function CardsSlider({state}) {
     const swiperRef = useRef(null)
