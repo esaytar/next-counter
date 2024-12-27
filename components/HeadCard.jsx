@@ -3,9 +3,10 @@
 import { setDiffTime } from '@/app/page'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { CALL_DATE } from '../data/dates'
 
 export default function HeadCard({currentDate}) {
-    const [today, setToday] = useState('05.07.2024')
+    const [today, setToday] = useState()
     const [weeks, setWeeks] = useState(0)
     const [daysTil, setDaysTil] = useState(0)
 
@@ -32,8 +33,8 @@ export default function HeadCard({currentDate}) {
             </Link>
             <div>
                 <h1 className="text-red-500 font-bold">Сегодня: {today}</h1>
-                <div>{daysTil} / 365 дней</div>
-                <div>{weeks} / 52 недель</div>
+                <div>{daysTil > 0 ? Math.min(daysTil, 365) : 0} / 365 дней</div>
+                <div>{weeks > 0 ? Math.min(weeks, 52) : 0} / 52 недель</div>
             </div>
         </div>
     )

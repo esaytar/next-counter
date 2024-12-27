@@ -22,7 +22,7 @@ export default function Home() {
         <HeadCard currentDate={DEM_DATE}/>
           <button className="hidden absolute top-0 right-0 bg-[#ffcccc] px-3 py-1 cursor-pointer z-10 rounded-md text-[#ff0000] 
             hover:bg-[#fcb8b8] lg:m-4 m-3 lg:block" onClick={() => {setIsSlider(!isSlider)}}>Сменить</button>
-          <div className="bg-white w-full rounded-xl lg:p-5 p-3 text-lg overflow-hidden">
+          <div className="bg-white w-full rounded-xl lg:p-4 p-3 text-lg overflow-hidden">
             <CalendarSlider state={isSlider}/>
           </div>
       </div>

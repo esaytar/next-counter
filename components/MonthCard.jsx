@@ -56,7 +56,7 @@ export default function MonthCard({month, year, number, startDate}) {
             }
 
             function countTilDMB() {
-                if (366 >= daysSince && daysSince > 0) return `| ${daysSince}-й день службы`
+                if (365 >= daysSince && daysSince > 0) return `| ${daysSince}-й день службы`
                 else if (daysSince <= 0) return ``
                 else return `| после дембеля не служим`
             }     
@@ -75,7 +75,8 @@ export default function MonthCard({month, year, number, startDate}) {
 
     return (
         <div className="flex flex-col gap-2 h-auto">
-            <p className={`font-bold text-center ${currentMonth === number ? 'text-[#ff0000]' : 'text-inherit'}`}>{month} {year}</p>
+            <p className={`font-bold text-center ${currentMonth === number && new Date().getFullYear() === Number(year) ?
+                'text-[#ff0000]' : 'text-inherit'}`}>{month} {year}</p>
             <div className="flex flex-col gap-2.5 w-full">
                 <div className="grid grid-cols-7 place-items-center font-semibold">
                     {daysOfTheWeek.map((day, index) => (

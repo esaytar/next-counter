@@ -3,25 +3,10 @@
 import { register } from 'swiper/element/bundle'
 import MonthCard from './MonthCard'
 import { useRef, useEffect, useState } from 'react'
-import {dates} from '../data/dates'
+import {dmbYear, dates, printMonths, DEM_DATE, CALL_DATE} from '../data/dates'
 
 register()
-
-const dmbYear = [
-    {month: 'Июль', number: 6, year: 2024},
-    {month: 'Август', number: 7, year: 2024},
-    {month: 'Сентябрь', number: 8, year: 2024},
-    {month: 'Октябрь', number: 9, year: 2024},
-    {month: 'Ноябрь', number: 10, year: 2024},
-    {month: 'Декабрь', number: 11, year: 2024},
-    {month: 'Январь', number: 0, year: 2025},
-    {month: 'Февраль', number: 1, year: 2025},
-    {month: 'Март', number: 2, year: 2025},
-    {month: 'Апрель', number: 3, year: 2025},
-    {month: 'Май', number: 4, year: 2025},
-    {month: 'Июнь', number: 5, year: 2025},
-    {month: 'Июль', number: 6, year: 2025},
-]
+printMonths()
 
 export default function CalendarSlider({state}) {
     const swiperRef = useRef(null)
@@ -36,14 +21,21 @@ export default function CalendarSlider({state}) {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
+    function setSliderPosition() {
+        if (dmbYear[0].number === new Date().getMonth() 
+            && new Date().getFullYear() === Number(dmbYear[0].year)) return 0
+        else if (dmbYear[dmbYear.length - 1].number === new Date().getMonth() || new Date(DEM_DATE) < new Date()) return dmbYear.length - 1
+        else return Math.abs(new Date(DEM_DATE).getMonth() - new Date().getMonth() + 1)
+    }
+
     useEffect(() => {
         if (!swiperRef) return 
         const swiperContainer = swiperRef.current
         const params = {
-            initialSlide: Math.abs(7 - new Date().getMonth()),
+            initialSlide: setSliderPosition(),
             breakpoints: {
-                0: { initialSlide: Math.abs(6 - new Date().getMonth())},
-                455: { slidesPerView: 2, initialSlide: Math.abs(7 - new Date().getMonth())}, 
+                0: { initialSlide: setSliderPosition()},
+                455: { slidesPerView: 2 }, 
                 900: { slidesPerView: 2 },
                 1300: { slidesPerView: 3 }
             },
@@ -75,7 +67,7 @@ export default function CalendarSlider({state}) {
                                 month={item.month}
                                 year={item.year}
                                 number={item.number} 
-                                startDate={dates[1].date}
+                                startDate={CALL_DATE}
                             />  
                         </swiper-slide>
                     ))}
@@ -88,7 +80,7 @@ export default function CalendarSlider({state}) {
                         month={item.month}
                         year={item.year}
                         number={item.number} 
-                        startDate={dates[1].date}
+                        startDate={CALL_DATE}
                     />  
                 ))}
             </div>

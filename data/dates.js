@@ -2,6 +2,13 @@ export const CALL_DATE = "2024-07-05 00:00:00"
 export const DEM_DATE = "2025-07-05 00:00:00"
 const nearestCall = getNextSunday()
 const [nextMonthDate, monthsCount] = getNextMonth(DEM_DATE)
+const newYear = new Date()
+newYear.setFullYear(newYear.getFullYear() + 1)
+newYear.setMonth(0, 1)
+newYear.setHours(0, 0, 0)
+export const dmbYear = []
+const translations = { January: 'Январь', February: 'Февраль', March: 'Март', April: 'Апрель', May: 'Май', June: 'Июнь',
+    July: 'Июль', August: 'Август', September: 'Сентябрь', October: 'Октябрь', November: 'Ноябрь', December: 'Декабрь'}
 
 export const dates = [
     /*{ reason: 'Двухлетие знакомства', date: "2024-07-18 20:55:00" },
@@ -17,15 +24,35 @@ export const dates = [
     { reason: 'Четверть службы', date: getQuarterOfTheYear() },
     { reason: '100 дней после призыва', date: getDaysTil(265) },
     { reason: '200 дней до дембеля', date: getDaysTil(200) },
-    { reason: 'Новый год', date: "2025-01-01 00:00:00" },,
+    (newYear < new Date(DEM_DATE)) && { reason: 'Новый год', date: newYear },
     { reason: 'Половина службы', date: getHalfOfTheYear() },
     { reason: '200 дней после призыва', date: getDaysTil(165) },
     { reason: '100 дней до дембеля', date: getDaysTil(100) },
     { reason: 'Четверть до дембеля', date: getLastQuarter() },
     { reason: '300 дней после призыва', date: getDaysTil(65) },
     { reason: 'Дембель', date: DEM_DATE },
-    (monthsCount !== 12 && monthsCount !== 0) && { reason: `${monthsCount} месяцев после призыва`, date: nextMonthDate }
+    (monthsCount !== 12 && monthsCount !== 0 && new Date() <= new Date(DEM_DATE)) 
+        && { reason: `${monthsCount} месяцев после призыва`, date: nextMonthDate }
 ]
+
+export function printMonths() {
+    const start = new Date(CALL_DATE)
+    const end = new Date(DEM_DATE)
+    let point = new Date(start)
+
+    const options = { year: 'numeric', month: 'long', day: 'numeric'}
+
+    const translateMonths = (word) => translations[word]
+
+    for (let i = 0; point <= end; i++) {
+        let [mon, day, year] = point.toLocaleDateString('en-EN', options).replace(/,/g, '').split(' ')
+        dmbYear.push({month: translateMonths(mon), number: point.getMonth(), year: year})
+        const currentDay = point.getDate();
+        point.setMonth(point.getMonth() + 1);
+
+        if (point.getDate() !== currentDay) point.setDate(-1) 
+    }
+}
 
 function calculateDaysDifference(demDate, callDate) {
     return (new Date(demDate) - new Date(callDate)) / (1000 * 60 * 60 * 24);

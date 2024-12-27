@@ -2,7 +2,7 @@
 
 .day {width: 100%; text-align: center; padding: 2.5px;}
 
-.notIncludedDay {color: rgba(0, 0, 0, 0.511) !important; background-color: #f1f1f1;}
+.notIncludedDay {color: rgba(0, 0, 0, 0.511) !important; background-color: #f1f1f1 !important;}
 
 .day:nth-child(7n + 6), 
 .day:nth-child(7n), 
