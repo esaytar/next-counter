@@ -46,12 +46,13 @@ export function printMonths() {
 
     for (let i = 0; point <= end; i++) {
         let [mon, day, year] = point.toLocaleDateString('en-EN', options).replace(/,/g, '').split(' ')
-        dmbYear.push({month: translateMonths(mon), number: point.getMonth(), year: year})
+        dmbYear.push({month: translateMonths(mon), number: point.getMonth(), year: year, id: i})
         const currentDay = point.getDate();
         point.setMonth(point.getMonth() + 1);
 
         if (point.getDate() !== currentDay) point.setDate(-1) 
     }
+// console.table(dmbYear)
 }
 
 function calculateDaysDifference(demDate, callDate) {

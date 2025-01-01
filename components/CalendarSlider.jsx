@@ -21,20 +21,26 @@ export default function CalendarSlider({state}) {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    function setSliderPosition() {
+    function setSliderPosition(step) {
         if (dmbYear[0].number === new Date().getMonth() 
             && new Date().getFullYear() === Number(dmbYear[0].year)) return 0
-        else if (dmbYear[dmbYear.length - 1].number === new Date().getMonth() || new Date(DEM_DATE) < new Date()) return dmbYear.length - 1
-        else return Math.abs(new Date(DEM_DATE).getMonth() - new Date().getMonth() + 1)
+        else if (dmbYear[dmbYear.length - 1].number === new Date().getMonth() || new Date(DEM_DATE) < new Date()) return dmbYear.length - step
+        else {
+            let start = 0
+            dmbYear.map((item) => {
+                if (item.number === new Date().getMonth()) start = item.id - step
+            })
+            return start
+        } 
     }
 
     useEffect(() => {
         if (!swiperRef) return 
         const swiperContainer = swiperRef.current
         const params = {
-            initialSlide: setSliderPosition(),
+            initialSlide: setSliderPosition(1),
             breakpoints: {
-                0: { initialSlide: setSliderPosition()},
+                0: { initialSlide: setSliderPosition(0)},
                 455: { slidesPerView: 2 }, 
                 900: { slidesPerView: 2 },
                 1300: { slidesPerView: 3 }
