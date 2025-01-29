@@ -50,7 +50,7 @@ export default function page() {
             <div className='m-auto lg:w-8/12 grid grid-cols-[repeat(23,_1fr)] grid-rows-[repeat(22,_minmax(0,_1fr))] overflow-x-scroll lg:overflow-hidden'>
                 {yearArray.map((item) => (
                     item.map((i, index) => (
-                        i !== null ? <div key={index} className={`border border-black text-right cursor-pointer ${diff > i ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-gray-200'}`}>{i}</div> : <div key={index}></div>
+                        i !== null ? <div key={index} className={`border border-black text-right cursor-pointer ${diff >= i ? 'bg-red-600 hover:bg-red-700' : 'hover:bg-gray-200'}`}>{i}</div> : <div key={index}></div>
                     ))
                 ))}
             </div>
