@@ -37,7 +37,7 @@ export default function page() {
     const callDay = new Date(CALL_DATE)
 
     useEffect(() => {
-        setDiff(Math.round((today - callDay) / (1000 * 60 * 60 * 24)))
+        setDiff(Math.floor((today - callDay) / (1000 * 60 * 60 * 24)))
     }, [today.getDate()])
 
     return (
