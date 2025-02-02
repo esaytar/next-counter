@@ -14,9 +14,9 @@ export const dates = [
     /*{ reason: 'Двухлетие знакомства', date: "2024-07-18 20:55:00" },
     { reason: 'Кошачий день', date: "2024-07-29 00:00:00" },
     { reason: 'Рыбий день', date: "2024-08-29 00:00:00" },
-    { reason: 'Годовщина', date: "2024-09-06 00:00:00" },
-    { reason: '23 февраля', date: "2025-02-23 00:00:00" },
-    { reason: 'Ближайший звонок', date: nearestCall }, */
+    { reason: 'Годовщина', date: "2024-09-06 00:00:00" }, 
+    { reason: '23 февраля', date: "2025-02-23 00:00:00" },*/
+    // { reason: 'Ближайший звонок', date: nearestCall },
     { reason: 'Повестка', date: "2024-07-02 08:00:00" },
     { reason: 'Призыв', date: CALL_DATE },
     { reason: 'Присяга', date: "2024-08-02 09:00:00" },
@@ -97,15 +97,25 @@ function getNextMonth(data) {
     const nextMonthDate = new Date()
     let monthsCount = 0
 
-    if (today.getDate() < new Date(DEM_DATE).getDate()) {
-        monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth())
+    function findMonthsCount(step, sign) {
+        switch (sign) {
+            case '-':
+                return Math.abs(new Date().getMonth() - new Date(data).getMonth()) + step 
+            case '+':
+                return Math.abs(new Date().getMonth() + new Date(data).getMonth()) + step
+            default:
+                return
+        }
+    }
+
+    if (today.getDate() < new Date(DEM_DATE).getDate()) {        
         nextMonthDate.setMonth(today.getMonth(), new Date(DEM_DATE).getDate())
+        monthsCount = new Date(data).getFullYear() !== new Date().getFullYear() ? findMonthsCount(0, '-') : findMonthsCount(0, '+')
     } else {
-        monthsCount = Math.abs(new Date().getMonth() - new Date(data).getMonth()) + 1
         nextMonthDate.setMonth(today.getMonth() + 1, new Date(DEM_DATE).getDate())
+        monthsCount = new Date(data).getFullYear() !== new Date().getFullYear() ? findMonthsCount(1, '-') : findMonthsCount(1, '+')
     }
     nextMonthDate.setHours(0, 0, 0, 0)
 
     return [nextMonthDate, monthsCount]
 }
-
