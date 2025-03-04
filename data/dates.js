@@ -1,5 +1,6 @@
 export const CALL_DATE = "2024-07-05 00:00:00"
 export const DEM_DATE = "2025-07-05 00:00:00"
+export const overallDays = (new Date(DEM_DATE) - new Date(CALL_DATE)) / (1000 * 60 * 60 * 24)
 const nearestCall = getNextSunday()
 const [nextMonthDate, monthsCount] = getNextMonth(DEM_DATE)
 const newYear = new Date()
@@ -32,7 +33,7 @@ export const dates = [
     { reason: '300 дней после призыва', date: getDaysTil(65) },
     { reason: 'Дембель', date: DEM_DATE },
     (monthsCount !== 12 && monthsCount !== 0 && new Date() <= new Date(DEM_DATE)) 
-        && { reason: `${monthsCount} месяцев после призыва`, date: nextMonthDate }
+        && { reason: `${monthsCount} месяцев службы`, date: nextMonthDate }
 ]
 
 export function printMonths() {
@@ -52,7 +53,6 @@ export function printMonths() {
 
         if (point.getDate() !== currentDay) point.setDate(-1) 
     }
-    // console.table(dmbYear)
 }
 
 function calculateDaysDifference(demDate, callDate) {

@@ -3,7 +3,7 @@
 import { setDiffTime } from '@/app/page'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { CALL_DATE } from '../data/dates'
+import { CALL_DATE, overallDays } from '../data/dates'
 
 export default function HeadCard({currentDate}) {
     const [today, setToday] = useState()
@@ -12,7 +12,7 @@ export default function HeadCard({currentDate}) {
 
     function findWeeks() {
         const difference = setDiffTime(currentDate)
-        return 52 - Math.ceil(Math.floor(difference / (1000 * 60 * 60 * 24)) / 7)
+        return Math.floor(overallDays / 7) - Math.ceil(Math.floor(difference / (1000 * 60 * 60 * 24)) / 7)
     }
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function HeadCard({currentDate}) {
         setToday(new Date().toLocaleDateString())
         setDaysTil(() => {
             const diff = setDiffTime(currentDate)
-            return 365 - Math.ceil(diff / (1000 * 60 * 60 * 24))
+            return overallDays - Math.ceil(diff / (1000 * 60 * 60 * 24))
         })
     }, [today]) 
 
@@ -33,8 +33,8 @@ export default function HeadCard({currentDate}) {
             </Link>
             <div>
                 <h1 className="text-red-500 font-bold">Сегодня: {today}</h1>
-                <div>{daysTil > 0 ? Math.min(daysTil, 365) : 0} / 365 дней</div>
-                <div>{weeks > 0 ? Math.min(weeks, 52) : 0} / 52 недель</div>
+                <div>{daysTil > 0 ? Math.min(daysTil, 365) : 0} / {overallDays} дней</div>
+                <div>{weeks > 0 ? Math.min(weeks, 52) : 0} / {Math.floor(overallDays / 7)} недель</div>
             </div>
         </div>
     )

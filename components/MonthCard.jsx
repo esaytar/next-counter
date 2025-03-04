@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import styles from './MonthCard.module.css'
-import {DEM_DATE} from '../data/dates'
+import {DEM_DATE, overallDays} from '../data/dates'
 
 const daysOfTheWeek = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс']
 
@@ -56,7 +56,7 @@ export default function MonthCard({month, year, number, startDate}) {
             }
 
             function countTilDMB() {
-                if (365 >= daysSince && daysSince > 0) return `| ${daysSince}-й день службы`
+                if (overallDays >= daysSince && daysSince > 0) return `| ${daysSince}-й день службы`
                 else if (daysSince <= 0) return ``
                 else return `| после дембеля не служим`
             }     
