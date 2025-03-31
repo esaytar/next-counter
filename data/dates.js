@@ -98,13 +98,14 @@ function getNextMonth(data) {
     const stringData = new Date(data)
 
     let monthsCount = 12 - ((stringData.getFullYear() - today.getFullYear()) * 12 + (stringData.getMonth() - today.getMonth()))
-    nextMonthDate.setMonth(today.getMonth() + 1)
     nextMonthDate.setDate(stringData.getDate())
 
     if (stringData.getDate() > today.getDate()) {
         nextMonthDate.setMonth(today.getMonth())
-    } else monthsCount++
-
+    } else {
+        monthsCount++
+        nextMonthDate.setMonth(today.getMonth() + 1)
+    }
     nextMonthDate.setHours(0, 0, 0, 0)
 
     return [nextMonthDate, monthsCount]
