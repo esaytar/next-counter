@@ -32,7 +32,7 @@ export const dates = [
     { reason: 'Четверть до дембеля', date: getLastQuarter() },
     { reason: '300 дней после призыва', date: getDaysTil(65) },
     { reason: 'Дембель', date: DEM_DATE },
-    (nextMonthDate.toLocaleString() !== new Date(DEM_DATE).toLocaleDateString()) 
+    ((new Date(nextMonthDate).toLocaleDateString() !== new Date(DEM_DATE).toLocaleDateString()) && (monthsCount < 11))
         && { reason: `${monthsCount} месяцев службы`, date: nextMonthDate }
 ]
 
