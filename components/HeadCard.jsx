@@ -20,7 +20,7 @@ export default function HeadCard({currentDate}) {
         setToday(new Date().toLocaleDateString())
         setDaysTil(() => {
             const diff = setDiffTime(currentDate)
-            return overallDays - Math.ceil(diff / (1000 * 60 * 60 * 24))
+            return overallDays - Math.floor(diff / (1000 * 60 * 60 * 24))
         })
     }, [today]) 
 
