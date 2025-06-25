@@ -1,6 +1,7 @@
 export const CALL_DATE = "2024-07-05 00:00:00"
 export const DEM_DATE = new Date("2025-07-05T16:12:00+03:00")
-export const overallDays = Math.floor((DEM_DATE - new Date(CALL_DATE)) / (1000 * 60 * 60 * 24))
+export const dmbMidnight = new Date(DEM_DATE)
+export const overallDays = Math.floor((new Date(dmbMidnight).setHours(0, 0, 0, 0) - new Date(CALL_DATE)) / (1000 * 60 * 60 * 24))
 const nearestCall = getNextSunday()
 const [nextMonthDate, monthsCount] = getNextMonth(DEM_DATE)
 const newYear = new Date()
