@@ -44,7 +44,7 @@ export default function MonthCard({month, year, number, startDate}) {
 
         const iteratedDays = daysArray.map((i, index) => {
             date.setDate(index + 1)
-            const period = date >= new Date(startDate) && date <= new Date(DEM_DATE).setDate(new Date(DEM_DATE).getDate() + 1)
+            const period = date >= new Date(startDate) && date <= new Date(DEM_DATE).setDate(new Date(DEM_DATE).getDate())
             const diff = date <= new Date() && date >= new Date(startDate)
             const daysTil = Math.floor((date - new Date()) / (1000 * 60 * 60 * 24))
             const daysSince = Math.ceil((date - new Date(startDate)) / (1000 * 60 * 60 * 24))
