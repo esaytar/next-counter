@@ -46,7 +46,7 @@ export default function MonthCard({month, year, number, startDate}) {
             date.setDate(index + 1)
             const period = date >= new Date(startDate) && date <= new Date(dmbMidnight).setDate(new Date(dmbMidnight).getDate() + 1)
             const diff = date <= new Date() && date >= new Date(startDate)
-            const daysTil = Math.floor((date - new Date()) / (1000 * 60 * 60 * 24))
+            const daysTil = Math.ceil((date - new Date()) / (1000 * 60 * 60 * 24))
             const daysSince = Math.ceil((date - new Date(startDate)) / (1000 * 60 * 60 * 24))
 
             function howMuchDays() {

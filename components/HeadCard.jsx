@@ -9,9 +9,11 @@ export default function HeadCard({currentDate}) {
     const [today, setToday] = useState()
     const [weeks, setWeeks] = useState(0)
     const [daysTil, setDaysTil] = useState(0)
+    const currentDateMidnight = new Date(currentDate)
+    currentDateMidnight.setHours(0, 0, 0, 0)
 
     function findWeeks() {
-        const difference = setDiffTime(currentDate)
+        const difference = setDiffTime(currentDateMidnight)
         return Math.floor(overallDays / 7) - Math.ceil(Math.floor(difference / (1000 * 60 * 60 * 24)) / 7)
     }
 
@@ -19,7 +21,7 @@ export default function HeadCard({currentDate}) {
         setWeeks(findWeeks())
         setToday(new Date().toLocaleDateString())
         setDaysTil(() => {
-            const diff = setDiffTime(currentDate)
+            const diff = setDiffTime(currentDateMidnight)
             return overallDays - Math.ceil(diff / (1000 * 60 * 60 * 24))
         })
     }, [today]) 
